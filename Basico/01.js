@@ -27,9 +27,7 @@ console.log(typeof y);
 //MÉTODOS: alert, confirm e prompt(recebem respostas) 
 // -> window.prompt, ... 
 //exemplo: converter métodos pra número -> Number
-let idade = '0';
-//prompt('Idade: ');
-idade = Number(idade);
+//const idade = prompt('Idade: '); idade = Number(idade);
 
 //troca de valores
 let a = 'A';//b
@@ -58,6 +56,8 @@ console.log(string.length); //contagem de caracteres 1-x
 console.log(string.slice(2, 5)); // 5-2 -> retorna caracteres restantes
 console.log(string.split(' ')); //divide pelo caractere x
 console.log(string.toUpperCase()); // também toLoweCase() 
+
+//numbers
 
 
 
