@@ -26,7 +26,47 @@ console.log(typeof y);
 //Funções dentro de objetos = métodos | fora do objeto = função
 //MÉTODOS: alert, confirm e prompt(recebem respostas) 
 // -> window.prompt, ... 
+//exemplo: converter métodos pra número -> Number
+let idade = '0';
+//prompt('Idade: ');
+idade = Number(idade);
 
-let TestePush = 27;
+//troca de valores
+let a = 'A';//b
+let b = 'B';//c
+let c = 'C';//a
+
+let auxA = a;
+
+a = b;
+b = c;
+c = auxA;
+console.log(`a = ${a}`);
+console.log(`b = ${b}`);
+console.log(`c = ${c}`);
+//ou 
+[a, b, c] = [b, c, a];
+
+//Strings: métodos: 
+let string = "teste teste";
+
+console.log(string.charAt(3)); // ou string[3]; caractere no index (x)
+console.log(string.indexOf('t')); // index do primeiro registro do caractere (x)
+console.log(string.lastIndexOf('t')); // index do último registro do caractere (x)
+console.log(string.replace('e', 0)); //substituição
+console.log(string.length); //contagem de caracteres 1-x
+console.log(string.slice(2, 5)); // 5-2 -> retorna caracteres restantes
+console.log(string.split(' ')); //divide pelo caractere x
+console.log(string.toUpperCase()); // também toLoweCase() 
+
+
+
+
+
+
+
+
+
+
 
 
