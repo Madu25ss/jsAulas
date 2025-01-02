@@ -33,15 +33,20 @@ console.log(EPaisagem(40, 30.5));
 
 //fizzBuzz
 
+let num = 30;
 function FizzBuzz(num) {
     let msg;
     if (num >= 0 && num <= 100) {
-        if (num % 3 == 0) {
+        if ((num % 5 == 0) && (num % 3 == 0)) {
+            msg = 'FizzBuzz';
+        } else if (num % 3 == 0)  {
             msg = 'Fizz';
         } else if (num % 5 == 0) {
             msg = 'Buzz';
-        } else if ((num % 5 == 0) || (num % 3 == 0)) {
-            msg = 'FizzBuzz';
         }
+    }else {
+        msg = `Valor Inválido`;
     }
+    console.log(msg);
 }
+FizzBuzz(num);
