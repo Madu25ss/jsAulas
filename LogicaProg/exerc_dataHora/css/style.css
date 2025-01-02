@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    outline: 0;
+}
+
+html {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    padding: 0;
+    background: #EFF3EA;
+    font-family: 'Playfair Display', sans-serif;
+    font-size: 1.3em;
+    line-height: 1.5em;
+
+}
+
+.container{
+    max-width: 640px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.retornoData {
+    font-weight: 800;
+    font-size: 35px;
+    line-height: 40px;
+}
+
+.imagemGatinhos {
+    width: 600px;
+    height: 500px;
+    border-radius: 10px;
+}
