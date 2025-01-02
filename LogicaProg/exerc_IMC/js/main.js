@@ -1,6 +1,7 @@
 function escopoImc() {
     const form = document.querySelector('.formIMC');
     const resultado = document.querySelector('.resultadoCalculo');
+    const p = document.createElement('p');
 
     function calculaImc (evento) {
         evento.preventDefault();
@@ -12,10 +13,11 @@ function escopoImc() {
         resultadoImc(peso.value, altura.value);
         
 
+        resultado.appendChild(p);
+        p.style.paddingTop = `5px`;
         resultado.style.borderRadius = `10px`;
         resultado.style.height = `40px`;
         resultado.style.marginTop = `20px`;
-        resultado.style.paddingTop = `6px`;
     }
 
     function resultadoImc(pesoX, alturaY) {
@@ -43,35 +45,37 @@ function escopoImc() {
 
         if (validacao() == true) {
             console.log(`peso:${pesoX}  ;  altura:${alturaY}`);
-            let valorImc = Math.round((pesoX / (alturaY*alturaY)));
-            resultado.innerHTML = `SEU IMC É ${valorImc}`;
+            let valorImc = (pesoX / (alturaY*alturaY));
+            p.innerHTML = `SEU IMC É ${(valorImc.toFixed(2))} `;
 
-            if(valorImc > 40) {
-                resultado.innerHTML += ` (Obesidade grau 3)`;
-                resultado.style.backgroundColor = `#FF9B9B`;//trocar cor
+            const nivelimc = ['(Obesidade grau 3)', ' (Obesidade grau 2)', '(Obesidade grau 1)', '(Sobrepeso)', '(Peso normal)', '(Abaixo do peso)'];
+
+            if(valorImc >= 40) {
+                p.innerHTML += nivelimc[0];
+                resultado.style.backgroundColor = `#FF9B9B`;
                 
-            } else if (valorImc >= 35 && valorImc <= 39.9) {
-                resultado.innerHTML += ` (Obesidade grau 2)`;
-                resultado.style.backgroundColor = `#FF9B9B`;//trocar cor
+            } else if (valorImc >= 35 /*&& valorImc <= 39.9*/) {
+                p.innerHTML += nivelimc[1];
+                resultado.style.backgroundColor = `#FF9B9B`;
     
-            } else if (valorImc >= 30 && valorImc <= 34.9) {
-                resultado.innerHTML += ` (Obesidade grau 1)`;
-                resultado.style.backgroundColor = `#FF9B9B`;//trocar cor
+            } else if (valorImc >= 30 /*&& valorImc <= 34.9*/) {
+                p.innerHTML +=nivelimc[2];
+                resultado.style.backgroundColor = `#FF9B9B`;
     
-            }else if (valorImc >= 25 && valorImc <= 29.9) {
-                resultado.innerHTML += ` (Sobrepeso)`;
-                resultado.style.backgroundColor = `#FFD6A5`; //trocar cor
+            }else if (valorImc >= 25 /*&& valorImc <= 29.9*/) {
+                p.innerHTML += nivelimc[3];
+                resultado.style.backgroundColor = `#FFD6A5`; 
     
-            } else if (valorImc >= 18.5 && valorImc <= 24.9) {
-                resultado.innerHTML += ` (Peso normal)`;
+            } else if (valorImc >= 18.5 /*&& valorImc <= 24.9*/) {
+                p.innerHTML += nivelimc[4];
                 resultado.style.backgroundColor = `#CBFFA9`;
             } else {
-                resultado.innerHTML += ` (Abaixo do peso)`;
-                resultado.style.backgroundColor = `#FF9B9B`; //trocar cor
+                p.innerHTML += nivelimc[5];
+                resultado.style.backgroundColor = `#FF9B9B`; 
             }
 
         } else if (validacao() == false) {
-            resultado.innerHTML = `Valores inválidos`;
+            p.innerHTML = `Valores inválidos`;
             resultado.style.backgroundColor = `#D9DFC6`;
             console.log('Os inputs não são válidos segunda a função de valição');
         } else {
@@ -83,3 +87,9 @@ function escopoImc() {
     form.addEventListener('submit', calculaImc);
 };
 escopoImc();
+
+/*melhorias: 
+linha 16: resultado.appendChild(p) -> as condições alteram o innerHtml do <p>, que depois é adicionado dentro da div resultado. 
+
+51: array com os níveis de imc, os ifs p.innerHtml recebem os respectivos indeces.
+*/
