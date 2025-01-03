@@ -39,15 +39,15 @@ function escopoPag() {
 
         if (horas >= 16 && horas < 20) {
             body.style.background = `linear-gradient(180deg, #b23621,rgb(252, 173, 116))`;
-            icon.innerHTML = `${meioSol}`;
+            icon.innerHTML = meioSol;
             img.src = imgTarde;
         }else if (horas >= 20) {
             body.style.background = `linear-gradient(180deg, #213555,rgb(108, 119, 123))`;
-            icon.innerHTML = `${luaIcon}`;
+            icon.innerHTML = luaIcon;
             img.src = imgNoite;
         } else {
             body.style.background = `linear-gradient(180deg, #f6bc50, #FCF596)`;
-            icon.innerHTML = `${solIcon}`;
+            icon.innerHTML = solIcon;
             img.src = imgManha;
         }
 
@@ -59,6 +59,9 @@ function escopoPag() {
 function converteDiaSemana(diaX) {
     const valoresSemana = [`Domingo`, `Segunda-feira`, `Terça-feira`, `Quarta-feira`, `Quinta-feira`, `Sexta-feira`, `Sábado`];
 
+    return valoresSemana[diaX];
+
+    /*
     switch (diaX) {
         case 0:
             return valoresSemana[0];
@@ -84,12 +87,16 @@ function converteDiaSemana(diaX) {
         default:
             return `Indefinido`;
             break;
-    }
+    }*/
+            
 };
 
 function converteMes(mesX) {
     const valorMes = [`Janeiro`, `Fevereio`, `Março`, `Abril`, `Maio`, `Junho`, `Julho`, `Agosto`, `Setembro`, `Outubro`, `Novembro`, `Dezembro`];
 
+    return valorMes[mesX];
+
+    /*
     switch (mesX) {
         case 0:
             return valorMes[0]
@@ -129,9 +136,10 @@ function converteMes(mesX) {
             break;
         default:
             break;
-    }
+    }*/
 
 };
 
 escopoPag();
+
 

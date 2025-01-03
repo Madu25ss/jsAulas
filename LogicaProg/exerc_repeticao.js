@@ -28,25 +28,32 @@ console.log(numMaior2(2,20));
 
 
 //ePaisagem: largura > altura = true
-const EPaisagem = (altura, largura) => largura>altura? true : false;
-console.log(EPaisagem(40, 30.5));
+const EPaisagem = (altura, largura) => largura>altura;
+console.log(EPaisagem(10, 30.5));
 
 //fizzBuzz
 
-let num = 30;
+let num = 15;
 function FizzBuzz(num) {
     let msg;
-    if (num >= 0 && num <= 100) {
-        if ((num % 5 == 0) && (num % 3 == 0)) {
-            msg = 'FizzBuzz';
-        } else if (num % 3 == 0)  {
-            msg = 'Fizz';
-        } else if (num % 5 == 0) {
-            msg = 'Buzz';
+
+    if (typeof(num) === 'number') {
+        if (num>0 && num <= 100) {
+            if ((num % 3 == 0) && (num % 5 ==0)) {
+                console.log('FizzBuzz');
+            } else if (num % 3 == 0) {
+                console.log('Fizz');
+            } else if (num % 5 == 0) {
+                console.log('Buzz')
+            }else {
+                console.log(`${num}`);
+            }
+        } else {
+            console.log('Num é inválido');
         }
-    }else {
-        msg = `Valor Inválido`;
+    } else {
+        console.log('Num não é um número');
     }
-    console.log(msg);
+
 }
 FizzBuzz(num);
