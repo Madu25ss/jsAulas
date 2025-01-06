@@ -5,6 +5,7 @@ function escopoPag() {
         }
     como manter a lista mesmo depois que atualiza?
     */
+   //refatorar 
 
     const form = document.querySelector('.form');
     const input = document.querySelector('.inputText');
@@ -26,6 +27,9 @@ function escopoPag() {
         evento.preventDefault();
         const tarefa = input.value;
 
+
+        //if (tarefa !== '') {} -> não aceitar vazio
+
         listaTarefas.push(tarefa);
 
         const li = document.createElement('li');
@@ -38,6 +42,11 @@ function escopoPag() {
         btnApagar.innerHTML = `Apagar Tarefa`;
 
         input.value = '';
+        input.focus();
+
+        //function para armazenar tarefas
+        //tarefas vão ser armazenadas no local storage
+        //json.stringfy e json.parse 
 
 
         function apagarTarefa(evento) {

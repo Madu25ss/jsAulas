@@ -47,6 +47,22 @@ function obj({nome, idade}) {
 }
 obj({nome: 'nomeX', idade: 20});
 
+//rest operator ...x -> pega o resto dos parâmetros
+function conta(operador, acumulador, ...numeros) {
+    for (let numero of numeros) {
+        if (operador === '+') acumulador += numero;
+        if (operador === '-') acumulador -= numero;
+        if (operador === '*') acumulador *= numero;
+        if (operador === '/') acumulador /= numero;
+        
+    }
+    console.log(acumulador);
+}
+conta('+', 0, 20, 30, 20);
+
 //return 
 
-//escopo lexico e closure
+//escopo lexico(escopo global: a function consegue identificar variáveis no escopo global e dentro do próprio escopo -> functions pai) e closure(habilidade que a função tem de acessar o escopo léxico dela)
+
+//funções CallBack -> funções que são executadas quando alguma ação acontece/é finalizada?
+
