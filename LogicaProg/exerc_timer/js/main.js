@@ -1,41 +1,61 @@
-/*
-const container = document.querySelector('.container');
-const mainDiv = document.querySelector('.timer');
+function escopoPag() {
+    const container = document.querySelector('.container');
+    const divTimer = document.querySelector('.timer');
 
-container.appendChild(mainDiv);
-*/
+    const btnIniciar = document.querySelector('.btnIniciar');
+    const btnPausar = document.querySelector('.btnPausar');
+    const btnZerar = document.querySelector('.btnZerar');
 
-let dataZero = new Date();
-dataZero.setHours(0,0,0,0);
+    let data = new Date();
+        data.setHours(0,0,0,0);
+    
+        
+    function TimerZerado(x) {
+        return x.toLocaleTimeString('pt-BR', {
+            hour12: false
+        });
+    }           
 
+    divTimer.innerHTML = `${TimerZerado(data)}`;
 
-//btn iniciar
-//problema: retorno final da dataAtualizada depois de 4 segundo -> 04:00:04, adicionando horas? --> arrumar!
-function addSeg(data, segundos) {
-    data.setSeconds(data.getSeconds() + segundos);// dando erro 
-    return data;
+    
+    function addSeg (data, segundos) {
+        data.setSeconds(data.getSeconds() + segundos);
+        return data;
+    }
+
+    
+    let TimerIniciar;
+    let dataAtt;
+
+    function iniciaTimer (evento) {
+        clearInterval(TimerIniciar);
+        TimerIniciar = setInterval(function() {
+            dataAtt = addSeg(data, 1);
+            divTimer.innerHTML = `${TimerZerado(dataAtt)}`;
+        }, 1000);
+        divTimer.style.color = `#448849`;
+    }
+    
+
+    function paraTimer (evento) {
+        clearInterval(TimerIniciar);
+        setTimeout(function() {
+            clearInterval(TimerIniciar);
+        },);
+        divTimer.style.color = `#7f1212`;
+    }
+
+    function zeraTimer (evento) {
+        paraTimer();
+        dataAtt.setHours(0,0,0,0);
+        divTimer.innerHTML = `${TimerZerado(dataAtt)}`;
+        divTimer.style.color = `#448849`;
+    }
+    
+
+    btnIniciar.addEventListener('click', iniciaTimer);
+    btnPausar.addEventListener('click', paraTimer);
+    btnZerar.addEventListener('click', zeraTimer);
 }
-
-let dataAtualizada;
-const timer = setInterval(function() {
-    dataAtualizada = addSeg(dataAtualizada, 1);
-    console.log(dataAtualizada.toLocaleTimeString('pt-BR', {
-        hour12: false
-    }));
-}, 1000);
-
-
-//btn parar
-setTimeout(function() {
-    clearInterval(timer);
-    console.log('fim teste');
-    dataAtualizada = new Date(dataZero.getTime());
-    console.log(dataAtualizada.toLocaleTimeString('pt-BR', {
-        hour12: false
-    }));
-}, 5000);
-//setTimeOut-> addListeningEvent('Click', setTimeOut(...) )
-
-//btn reset
-//como fazer a dataAtualizada voltar a ser DataZero? 
-//addListeningEvent('Click', dataAtualizada = dataZero)
+escopoPag();

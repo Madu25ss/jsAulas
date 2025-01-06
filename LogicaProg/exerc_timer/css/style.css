@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 :root {
-    --bg-color:#58A399;
-    --bg-color-darker:#386a63;
+    --bg-color:#B0EBB4;
+    --bg-color-darker:#448849;
 }
 
 * {
@@ -22,6 +22,41 @@ body{
     max-width: 640px;
     margin: 50px auto;
     background: #fff;
-    padding: 20px;
+    padding: 2% 15px;
+    padding-top: 1px;
     border-radius: 10px;
+}
+ 
+h1, .timer {
+    color: var(--bg-color-darker);
+}
+
+.timer {
+    font-size: 80px;
+    margin: 10px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.btn {
+    text-align: center;
+}
+
+.btnIniciar, .btnPausar, .btnZerar {
+    cursor: pointer;
+    margin-right: 20px;
+    width: 100px;
+    height: 30px;
+    border: 1px solid #868585;
+    border-radius: 4px;
+    font-size: 15px;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.btnIniciar:hover, .btnPausar:hover, .btnZerar:hover {
+    box-shadow: -2px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btnIniciar:active, .btnPausar:active, .btnZerar:active {
+    background-color: #e0dfdf;
 }
