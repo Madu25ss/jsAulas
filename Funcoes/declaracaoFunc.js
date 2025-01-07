@@ -64,5 +64,5 @@ conta('+', 0, 20, 30, 20);
 
 //escopo lexico(escopo global: a function consegue identificar variáveis no escopo global e dentro do próprio escopo -> functions pai) e closure(habilidade que a função tem de acessar o escopo léxico dela)
 
-//funções CallBack -> funções que são executadas quando alguma ação acontece/é finalizada?
+
 

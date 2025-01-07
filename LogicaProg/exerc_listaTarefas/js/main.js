@@ -1,63 +1,79 @@
-function escopoPag() {
-    /*css, correção, entender essa parte: function apagarTarefa(evento) {
-            const elementoLi = evento.target.parentElement;
-            list.removeChild(li);
-        }
-    como manter a lista mesmo depois que atualiza?
-    */
-   //refatorar 
 
-    const form = document.querySelector('.form');
-    const input = document.querySelector('.inputText');
-    const btnAddTarefa = document.querySelector('.button');
-    const divListaTarefas = document.querySelector('.listaTarefas');
+const inputTarefa = document.querySelector('.input-nova-tarefa');
+const btnTarefa = document.querySelector('.btn-add-tarefa');
+const tarefas = document.querySelector('.tarefas');
 
-    const list = document.createElement('ul');
-
-    divListaTarefas.appendChild(list);
-
-    list.classList.add('.list');
-
-    
-    let listaTarefas = [];
-
-    
-
-    function addTarefa(evento) {
-        evento.preventDefault();
-        const tarefa = input.value;
-
-
-        //if (tarefa !== '') {} -> não aceitar vazio
-
-        listaTarefas.push(tarefa);
-
-        const li = document.createElement('li');
-        li.textContent = tarefa;
-        list.appendChild(li);
-
-        const btnApagar = document.createElement('button');
-        btnApagar.classList.add('.btnApagar');
-        li.appendChild(btnApagar);
-        btnApagar.innerHTML = `Apagar Tarefa`;
-
-        input.value = '';
-        input.focus();
-
-        //function para armazenar tarefas
-        //tarefas vão ser armazenadas no local storage
-        //json.stringfy e json.parse 
-
-
-        function apagarTarefa(evento) {
-            const elementoLi = evento.target.parentElement;
-            list.removeChild(li);
-        }
-
-
-        btnApagar.addEventListener('click', apagarTarefa);
-    
-    }
-    form.addEventListener('submit', addTarefa);
+function criaLi() {
+    const li = document.createElement('li');
+    return li;      
 };
-escopoPag();
+
+inputTarefa.addEventListener('keypress', function(e) {
+    if (e.keyCode === 13) {
+        if (!inputTarefa.value) return;
+        criaTarefa(inputTarefa.value);
+    }
+});
+
+function limpaInput() {
+    inputTarefa.value = '';
+    inputTarefa.focus();
+};
+
+function criaBtnApagar(li) {
+    const botaoApagar = document.createElement('button');
+    botaoApagar.style.marginLeft = '20px';
+    botaoApagar.innerText = 'Apagar';
+    botaoApagar.setAttribute('class', 'apagar');
+    botaoApagar.setAttribute('title', 'Apagar esta tarefa');
+    li.appendChild(botaoApagar);
+};
+
+function criaTarefa(textoInput) {
+    const li = criaLi();
+    li.innerHTML = textoInput;
+    tarefas.appendChild(li);
+    limpaInput();
+    criaBtnApagar(li);
+    salvarTarefas();
+};
+
+btnTarefa.addEventListener('click', function() {
+    if (!inputTarefa.value) return;
+    criaTarefa(inputTarefa.value);
+});
+
+document.addEventListener('click', function(e) {
+    const el = e.target;
+
+    if (el.classList.contains('apagar')) {
+        el.parentElement.remove();
+        salvarTarefas();
+    }
+});
+
+function salvarTarefas() {
+    const liTarefas = tarefas.querySelectorAll('li');
+    const listaDeTarefas = [];
+
+    for (let tarefa of liTarefas) {
+        let tarefaTexto = tarefa.innerText;
+        tarefaTexto = tarefaTexto.replace('Apagar', '');
+        listaDeTarefas.push(tarefaTexto);
+    }
+
+    //criação de uma string do array listaDeTarefas pra json
+    const tarefajson = JSON.stringify(listaDeTarefas);
+    //local storage = lugar dentro do navegador onde é possível armazenar coisas que não vão se perder se a página for atualizada -> só aceita strings, por isso precisa converter o json com o stringify
+    localStorage.setItem('tarefas', tarefajson);
+};
+
+function addTarefasSalvas() {
+    const tarefasSalvas = localStorage.getItem('tarefas');
+    const listaTarefasSalvas = JSON.parse(tarefasSalvas);
+    
+    for (let tarefasSalvas of listaTarefasSalvas) {
+        criaTarefa(tarefasSalvas);
+    }
+}
+addTarefasSalvas();

@@ -1,4 +1,5 @@
-//colocar icon e fotos de novo
+import { luaIcon, solIcon, meioSol, imgNoite, imgTarde, imgManha } from "./iconsVar.js";
+
 function escopoPag() {
     const body = document.querySelector('#body');
     const data = new Date();
@@ -7,7 +8,13 @@ function escopoPag() {
     const p = document.createElement('p');
     p.classList.add('retornoData');
 
+    const icon = document.querySelector('.icon');
+    icon.classList.add('icon');
+    const img = document.createElement('img');
+    img.classList.add('imagemGatinhos');
+
     mainDiv.appendChild(p);
+    mainDiv.appendChild(img);
 
     
     function Retorno_objDate() {
@@ -28,12 +35,17 @@ function escopoPag() {
 
     
         if (horas >= 16 && horas < 20) {
-            body.style.backgroundColor = `linear-gradient(180deg, #b23621,rgb(252, 173, 116)) no-repeat`;
-        }else if (horas < 4) {
+            body.style.background = `linear-gradient(180deg, #b23621,rgb(252, 173, 116)) no-repeat`;
+            icon.innerHTML = `${meioSol}`;
+            img.src = imgTarde;
+        }else if (horas >= 20 || horas < 4) {
             body.style.background = `linear-gradient(180deg, #213555,rgb(108, 119, 123)) no-repeat`;
+            icon.innerHTML = `${luaIcon}`;
+            img.src = imgNoite;
         } else {
-            body.style.background = `linear-gradient(180deg, #f6bc50, #FCF596)no-repeat`;
-
+            body.style.background = `linear-gradient(180deg, #f6bc50, #FCF596) no-repeat`;
+            icon.innerHTML = `${solIcon}`;
+            img.src = imgManha;
         }
 
     }
