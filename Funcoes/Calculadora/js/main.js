@@ -11,11 +11,12 @@ function criaCalculadora() {
         },
 
         //nao funciona, não retorna a conta certa, arrumar 
+        //SOLUÇÃO: e.preventDefault() ,-,
         enter() {
             document.addEventListener('keypress', (e) => {
-                if (e.keyCode == 13) {
-                    console.log('aaaa');
-                    this.fazConta(); 
+                e.preventDefault();
+                if (e.keyCode === 13) {
+                    this.fazConta();
                 }
             });
         },
@@ -28,10 +29,13 @@ function criaCalculadora() {
                 if (!conta) {
                     alert('Conta inválida.');
                     return;
-                } else {
+                } 
+                else {
                     this.display.value = conta;
+                    console.log(this.display.value);
                 }
-
+            
+                    
                 
             } catch (error) {
                 alert('Conta Inválida.');
@@ -69,7 +73,9 @@ function criaCalculadora() {
 
                 if (el.classList.contains('btnEq')) {
                     this.fazConta();
+                    
                 }
+
 
             });//.bind(this));// o this dentro desse if usa o Document como referência, .bind(this) indica que a referência de this que deve ser usada é a que ta no this.btnClick(). 
 
@@ -77,7 +83,6 @@ function criaCalculadora() {
 
         btnDisplay(valor) {
             this.display.value += valor;
-            console.log(this.display.value);
         },
     };
 }
