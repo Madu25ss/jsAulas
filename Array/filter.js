@@ -1,6 +1,9 @@
 //filtrar os valores de um array -> filter, map, reduce
 
 //filter = retorna um array com a mesma quantidade de elementos ou menos. Filter NÃO ALTERA O ARRAY ORIGINAL
+//x.filter(valor, indice, array){}
+
+
 //retorno nums > 10
 const nums = [5, 50, 80, 1, 2, 3, 5, 8, 7, 11, 15, 22, 27];
 
@@ -40,6 +43,7 @@ const filterLetra = pessoas.filter(obj => obj.nome.toLowerCase().endsWith('a'));
 console.log(filterLetra);
 
 //MAP = altera os valores do  array. Altera o array. Sempre tem o mesmo tamanho que o array original.
+//x.map(valor, indice, array){}
 const doubleNums = nums.map(valor => valor*2);
 console.log(doubleNums);
 
@@ -62,6 +66,7 @@ console.log(addId);
 console.log(pessoas);
 
 //REDUCE: reduzir o array a um elemento
+//x.filter(acumulador, valor, indice, array){}, inicialização do acumulador);
 const somaNums = nums.reduce(function(acumulador, valor) {
     acumulador += valor;
     return acumulador;
@@ -82,3 +87,20 @@ const maisVelho = pessoas.reduce(function(n, valor) {
     return valor;
 });
 console.log(maisVelho);
+
+console.log('##');
+//Filter-Map-reduce
+/*
+const pares = nums.filter(function(valor) {
+    return valor % 2 === 0;
+}).map(function(valor) {
+    return valor*2;
+}).reduce(function(ac, valor) {
+    return ac += valor;
+});*/
+
+const pares = nums
+    .filter(valor => valor % 2 === 0)
+    .map(valor => valor*2)
+    .reduce((ac, valor) => ac += valor);
+console.log(pares);
