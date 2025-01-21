@@ -1,40 +1,54 @@
-//herança
+//"herança" ñ existe no js, -> "Delegação"
+//camiseta = cor, caneca = material -> Produto -> aumento e desconto
 
-//produto -> aumento e desconto
-//atributo específico do produto: a -> cor , b= material
 function Produto(nome, preco) {
     this.nome = nome;
     this.preco = preco;
+}
+
+Produto.prototype.aumento = function(quantia) {
+    this.preco += quantia;
 };
 
-Produto.prototype.desconto = function(porcentDesconto) {
-    this.preco -= this.preco * (porcentDesconto/100);
-}
+Produto.prototype.desconto = function(quantia) {
+    this.preco -= quantia;
+};
 
-Produto.prototype.aumento = function(porcentAumento) {
-    this.preco += this.preco * (porcentAumento/100);
-}
 
-const p1 = new Produto('a', 10);
-p1.desconto(50);
-console.log(p1);
-p1.aumento(50);
-console.log(p1);
-
-//atributo específico do produto: a -> cor , b= material
-function a(nome, preco, cor) {
+function Camiseta(nome, preco, cor) {
     Produto.call(this, nome, preco);
-    this.cor = cor
+    this.cor = cor;
 }
-a.prototype = Object.create(Produto.prototype);
-a.prototype.constructor = a;
+//criando um objeto vazio e atribuindo o prototype de Produto pra ele, assim passando para o Camiseta.Prototype: instancias de camiseta podem usar o aumento/desconto agr
+Camiseta.prototype = Object.create(Produto.prototype);
+//tudo oq não existir em Camiseta.prototype vai ser delegado para Produto.prototype.
 
-const a1 = new a('produtoTipoA', 12, 'azul');
-console.log(a1);
+const camiseta = new Camiseta('regata', 7.5, 'Preto');
+camiseta.aumento(10);
+camiseta.desconto(7.5);
+console.log(camiseta);
 
-a.prototype.aumento = function(porcentAumento) {
-    this.preco += porcentAumento;
+function Caneca(nome, preco, material, estoque) {
+   Produto.call(this, nome, preco);
+    this.material = material;
+
+    Object.defineProperty(this, 'estoque', {
+        enumerable: true,
+        configurable: false,
+        get:() => {return estoque},
+        set: function(valor) {
+            if (typeof valor !== 'number') return;
+            estoque = valor;
+        }
+    });
 }
+Caneca.prototype = Object.create(Produto.prototype);
+Caneca.prototype.constructor = Caneca;
 
-a1.aumento(10);
-console.log(a1);
+const caneca = new Caneca('xícara', 15.8, 'Plástico', 10);
+console.log(caneca);
+caneca.aumento(20);
+console.log(caneca);
+caneca.desconto(3.4);
+caneca.estoque = 24;
+console.log(caneca.estoque);
