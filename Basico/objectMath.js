@@ -1,5 +1,6 @@
 //Object math
 //arredondamento
+let num = 1.2;
 console.log(Math.round(num));
 console.log(Math.floor(num));
 console.log(Math.ceil(num));
