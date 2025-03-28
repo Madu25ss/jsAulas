@@ -7,7 +7,7 @@ function Produto(nome, preco, estoque) {
     //não mostra estoque
     */
    
-   //definição dos outros atributos
+   //definição dos outros atributos = +1 atributo = defineProperties
    Object.defineProperties(this, {
        nome: {
            enumerable: true,
@@ -23,7 +23,7 @@ function Produto(nome, preco, estoque) {
        },
    })
 
-    //definições de estoque
+    //definições de estoque = 1 atributo = defineProperty
     Object.defineProperty(this, 'estoque', {
         enumerable: true, //mostra a chave de estoque, valor undefined
         value: estoque, //mostra o valor de estoque
@@ -38,3 +38,5 @@ const p1 = new Produto('p1', 20, 3);
 p1.estoque = 4;
 delete p1.estoque;
 console.log(p1);
+
+console.log(Object.keys(p1));

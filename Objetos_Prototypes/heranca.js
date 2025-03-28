@@ -1,6 +1,8 @@
-//"herança" ñ existe no js, -> "Delegação"
-//camiseta = cor, caneca = material -> Produto -> aumento e desconto
+//Produto -> aumento de preço, desconto
+//Camiseta = cor, caneca = material
 
+
+//DEFINIÇÃO DE PRODUTO: pai dos produtos
 function Produto(nome, preco) {
     this.nome = nome;
     this.preco = preco;
@@ -14,41 +16,60 @@ Produto.prototype.desconto = function(quantia) {
     this.preco -= quantia;
 };
 
+//é preciso passar o prototype de Produto para Camiseta
+Object.setPrototypeOf(Camiseta, Produto);
 
-function Camiseta(nome, preco, cor) {
+//DEFINIÇÃO DE UM PRODUTO FILHO
+function Camiseta (nome, preco, cor) {
+    //lincando a função de Produto com a de Camiseta, camiseta vai herdar nome e preco do Produto
     Produto.call(this, nome, preco);
     this.cor = cor;
-}
-//criando um objeto vazio e atribuindo o prototype de Produto pra ele, assim passando para o Camiseta.Prototype: instancias de camiseta podem usar o aumento/desconto agr
+
+};
+
+//o objeto camiseta 1 agora se chama "Camiseta", e não "Produto" só por ser uma instância de produto, herdando métodos e atributos de "Produto" mas podendo criar os seus próprios.
 Camiseta.prototype = Object.create(Produto.prototype);
-//tudo oq não existir em Camiseta.prototype vai ser delegado para Produto.prototype.
+Camiseta.prototype.constructor = Camiseta;
 
-const camiseta = new Camiseta('regata', 7.5, 'Preto');
-camiseta.aumento(10);
-camiseta.desconto(7.5);
-console.log(camiseta);
+Camiseta.prototype.aumento = function(percentual) {
+    this.preco += this.preco * (percentual / 100);
+};
 
-function Caneca(nome, preco, material, estoque) {
-   Produto.call(this, nome, preco);
+
+const produto1 = new Produto('testeProduto', 111);
+
+const camiseta1 = new Camiseta('regata', 7.5, 'Preto');
+camiseta1.aumento(100);
+console.log(camiseta1);
+console.log(produto1);
+
+function Caneca(nome, preco, cor, material, estoque) {
+    Produto.call(this, nome, preco);
+
+    this.cor = cor;
     this.material = material;
 
     Object.defineProperty(this, 'estoque', {
         enumerable: true,
         configurable: false,
-        get:() => {return estoque},
+        get: function() {
+            return estoque;
+        },
         set: function(valor) {
-            if (typeof valor !== 'number') return;
-            estoque = valor;
+            if (typeof valor != 'number') return;
+            estoque = valor;  
         }
     });
 }
+
 Caneca.prototype = Object.create(Produto.prototype);
 Caneca.prototype.constructor = Caneca;
 
-const caneca = new Caneca('xícara', 15.8, 'Plástico', 10);
-console.log(caneca);
-caneca.aumento(20);
-console.log(caneca);
-caneca.desconto(3.4);
-caneca.estoque = 24;
-console.log(caneca.estoque);
+Caneca.prototype.desconto = function(percentual) {
+    this.preco -= this.preco*(percentual /100);
+} 
+
+const caneca1 = new Caneca('caneca1', 25, 'rosa', 'porcelana', 20);
+caneca1.desconto(50);
+console.log(caneca1);
+
