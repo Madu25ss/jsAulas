@@ -3,7 +3,7 @@
 
 //Agencia, conta e saldo
 
-//SuperClass
+//SuperClasse
 function Conta(agencia, conta, saldo) {
     this.agencia = agencia;
     this.conta = conta;
@@ -35,6 +35,7 @@ const conta1 = new Conta(11, 22, 10);
 console.log(conta1);
 conta1.depositar(11);
 conta1.sacar(20);
+conta1.sacar(20);
 
 
 function CC(agencia, conta, saldo, limite) {
@@ -60,9 +61,8 @@ const contaCorrente01 = new CC(11, 22, 0, 100);
 contaCorrente01.depositar(10);
 contaCorrente01.sacar(90);
 
-function CP(agencia, conta, saldo, limite) {
+function CP(agencia, conta, saldo) {
     Conta.call(this, agencia, conta, saldo);
-    this.limite = limite;
 
 }
 
@@ -70,5 +70,8 @@ CP.prototype = Object.create(Conta.prototype);
 CP.prototype.constructor = CP;
 
 const cp = new CP(12, 33, 0);
+console.log(cp);
+cp.depositar(10);
+console.log(cp);
 
 
